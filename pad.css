@@ -229,7 +229,7 @@ width:20px;height:20px;position:absolute;top:-1px;
 .light { background-image:url(Light.png) }
 .green { background-image:url(Green.png) }
 .heart { background-image:url(Heart.png) }
-.bomb { background-image:url(Bomb.png) }
+.omb { background-image:url(Bomb.png) }
 .input-prompt {
 	width:90px;
 	margin-top:-22px;
