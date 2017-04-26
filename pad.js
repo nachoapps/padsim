@@ -1,3 +1,6 @@
+var base_url = [location.protocol, '//', location.host, location.pathname].join('');
+var server_url = base_url.substring(0, base_url.lastIndexOf('/')+1);
+
 var colors = ['blue','green','red','light','dark','heart']
 	, colors2 = ['blue','green','red','light','dark','heart','poison','jammer', 'mortal', 'omb']
 	, colors3 = ['blue','green','red','light','dark']
@@ -199,7 +202,7 @@ function toggle(item, command){
 			}
 		}
 		if (temp23 != '1') colors.push(unCapitaliseFirstLetter(command));
-		document.getElementById('bc'+command).style.backgroundImage = "url('http://pad.dawnglare.com/"+command+temp23+".png')";
+		document.getElementById('bc'+command).style.backgroundImage = "url('/"+command+temp23+".png')";
 	}
 	if (item == 'replayarrows'){
 		if (command == 0){
@@ -308,17 +311,17 @@ function copyPattern(modifier){
 	}
 	document.getElementById("entry").value = tilePattern;
 	if (rows!=6 || cols !=5){
-		displayOutput("<a href='http://pad.dawnglare.com/?height="+cols+"&width="+rows+"&patt="+tilePattern+"'>Pattern Link</a><br />", modifier);
+		displayOutput("<a href='" + base_url + "?height="+cols+"&width="+rows+"&patt="+tilePattern+"'>Pattern Link</a><br />", modifier);
 		if (replayMoveSet.length > 0) {
-			displayOutput("<a href='http://pad.dawnglare.com/?height="+cols+"&width="+rows+"&patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"'>Pattern with Replay Link</a>", 1);
-			displayOutput("<br /><a href='http://pad.dawnglare.com/?height="+cols+"&width="+rows+"&patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"&drops=1'>Pattern with Replay with Drops Link</a>", 1);
+			displayOutput("<a href='" + base_url + "?height="+cols+"&width="+rows+"&patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"'>Pattern with Replay Link</a>", 1);
+			displayOutput("<br /><a href='" + base_url + "?height="+cols+"&width="+rows+"&patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"&drops=1'>Pattern with Replay with Drops Link</a>", 1);
 		}
 	}
 	else {
 		$.ajax({
 			 async: false,
 			 type: 'GET',
-			 url: 'http://pad.dawnglare.com/s.php?patt='+tilePattern+'&replay='+replayMoveSet.join('|'),
+			 url: server_url + 's.php?patt='+tilePattern+'&replay='+replayMoveSet.join('|'),
 			 success: function(data) {
 				 shortenedShareLink = data;
 			 },
@@ -327,18 +330,18 @@ function copyPattern(modifier){
 			 }
 		});
 		if(ajaxErrorOccured == 1){
-			displayOutput("<a href='http://pad.dawnglare.com/?patt="+tilePattern+"'>Pattern Link</a><br />", modifier);
+			displayOutput("<a href='" + base_url + "?patt="+tilePattern+"'>Pattern Link</a><br />", modifier);
 			if (replayMoveSet.length > 0) {
-				displayOutput("<a href='http://pad.dawnglare.com/?patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"'>Pattern with Replay Link</a>", 1);
-				displayOutput("<br /><a href='http://pad.dawnglare.com/?patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"&drops=1'>Pattern with Replay with Drops Link</a>", 1);
+				displayOutput("<a href='" + base_url + "?patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"'>Pattern with Replay Link</a>", 1);
+				displayOutput("<br /><a href='" + base_url + "?patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"&drops=1'>Pattern with Replay with Drops Link</a>", 1);
 			}
 			ajaxErrorOccured = 0;
 		}
 		else{
-			displayOutput("<a href='http://pad.dawnglare.com/?s="+shortenedShareLink+"0'>Pattern Link</a><br />", modifier);
+			displayOutput("<a href='" + base_url + "?s="+shortenedShareLink+"0'>Pattern Link</a><br />", modifier);
 			if (replayMoveSet.length > 0) {
-				displayOutput("<a href='http://pad.dawnglare.com/?s="+shortenedShareLink+"1'>Pattern with Replay Link</a>", 1);
-				displayOutput("<br /><a href='http://pad.dawnglare.com/?s="+shortenedShareLink+"2'>Pattern with Replay with Drops Link</a>", 1);
+				displayOutput("<a href='" + base_url + "?s="+shortenedShareLink+"1'>Pattern with Replay Link</a>", 1);
+				displayOutput("<br /><a href='" + base_url + "?s="+shortenedShareLink+"2'>Pattern with Replay with Drops Link</a>", 1);
 			}
 		}
 	}
@@ -613,7 +616,7 @@ function calculateOutput(item){ // DAMAGE CALC OPTIMIZATINO // XX COMBO AND XX C
                 if(showComboItems) {
                     comboText += "<div class='comboInfoBox'>" +
                         "<span>" + scoreTracker[colors2[i]][g]+" x </span> " +
-                        "<img width='32px' src='http://pad.dawnglare.com/" + capitaliseFirstLetter(colors2[i]) + ".png'>" +
+                        "<img width='32px' src='" + server_url + "/" + capitaliseFirstLetter(colors2[i]) + ".png'>" +
                         "</div>";
                 } else {
                     comboText += scoreTracker[colors2[i]][g]+" x "+colors2[i]+'<br />';
@@ -977,7 +980,7 @@ $(function(){		// CURSOR AT AND MOVING ORB SIZE
 		$.ajax({
 			 async: false,
 			 type: 'GET',
-			 url: 'http://pad.dawnglare.com/l.php?link='+$_GET['s'].slice(0, - 1),
+			 url: server_url + '/l.php?link='+$_GET['s'].slice(0, - 1),
 			 success: function(data) {
 				  shortenedData = data.split('~');
 			 }
