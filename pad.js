@@ -616,7 +616,7 @@ function calculateOutput(item){ // DAMAGE CALC OPTIMIZATINO // XX COMBO AND XX C
                 if(showComboItems) {
                     comboText += "<div class='comboInfoBox'>" +
                         "<span>" + scoreTracker[colors2[i]][g]+" x </span> " +
-                        "<img width='32px' src='" + server_url + "/" + capitaliseFirstLetter(colors2[i]) + ".png'>" +
+                        "<img width='32px' src='" + server_url + capitaliseFirstLetter(colors2[i]) + ".png'>" +
                         "</div>";
                 } else {
                     comboText += scoreTracker[colors2[i]][g]+" x "+colors2[i]+'<br />';
