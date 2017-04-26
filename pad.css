@@ -222,12 +222,14 @@ width:20px;height:20px;position:absolute;top:-1px;
 .jammer { background-image:url(Jammer.png) }
 .black { background-color:#000 }
 .poison { background-image:url(Poison.png) }
+.mortal { background-image:url(Mortal.png) }
 .red { background-image:url(Red.png) }
 .blue { background-image:url(Blue.png) }
 .dark { background-image:url(Dark.png) }
 .light { background-image:url(Light.png) }
 .green { background-image:url(Green.png) }
 .heart { background-image:url(Heart.png) }
+.bomb { background-image:url(Bomb.png) }
 .input-prompt {
 	width:90px;
 	margin-top:-22px;
