@@ -35,7 +35,7 @@ body {
 	z-index:2;
 }
 #board {
-	background-image:url('http://pad.dawnglare.com/bg.png');
+	background-image:url('bg.png');
 	background-size:180px 180px;
 	height:450px;
 	border:20px solid #1f201f;
@@ -128,40 +128,40 @@ body {
 	border-right: 1px solid #d2d2d2;
 }
 .image1 {
-	background:url("http://pad.dawnglare.com/atk.svg")
+	background:url("atk.svg")
 }
 .image2 {
-	background:url("http://pad.dawnglare.com/clock.svg")
+	background:url("clock.svg")
 }
 .image3 {
-	background:url("http://pad.dawnglare.com/question.svg")
+	background:url("question.svg")
 }
 .image4 {
-	background:url("http://pad.dawnglare.com/minus.png")
+	background:url("minus.png")
 }
 .image5 {
-	background:url("http://pad.dawnglare.com/plus.png")
+	background:url("plus.png")
 }
 .image6 {
-	background:url("http://pad.dawnglare.com/gear.png")
+	background:url("gear.png")
 }
 .image7 {
-	background:url("http://pad.dawnglare.com/Green.png")
+	background:url("Green.png")
 }
 .image8 {
-	background:url("http://pad.dawnglare.com/Red.png")
+	background:url("Red.png")
 }
 .image9 {
-	background:url("http://pad.dawnglare.com/Blue.png")
+	background:url("Blue.png")
 }
 .image10 {
-	background:url("http://pad.dawnglare.com/Light.png")
+	background:url("Light.png")
 }
 .image11 {
-	background:url("http://pad.dawnglare.com/Dark.png")
+	background:url("Dark.png")
 }
 .image12 {
-	background:url("http://pad.dawnglare.com/Heart.png")
+	background:url("Heart.png")
 }
 .topbutton {
 	float:left;
@@ -219,15 +219,15 @@ body {
 .cornerblock{
 width:20px;height:20px;position:absolute;top:-1px;
 }
-.jammer { background-image:url(http://pad.dawnglare.com/Jammer.png) }
+.jammer { background-image:url(Jammer.png) }
 .black { background-color:#000 }
-.poison { background-image:url(http://pad.dawnglare.com/Poison.png) }
-.red { background-image:url(http://pad.dawnglare.com/Red.png) }
-.blue { background-image:url(http://pad.dawnglare.com/Blue.png) }
-.dark { background-image:url(http://pad.dawnglare.com/Dark.png) }
-.light { background-image:url(http://pad.dawnglare.com/Light.png) }
-.green { background-image:url(http://pad.dawnglare.com/Green.png) }
-.heart { background-image:url(http://pad.dawnglare.com/Heart.png) }
+.poison { background-image:url(Poison.png) }
+.red { background-image:url(Red.png) }
+.blue { background-image:url(Blue.png) }
+.dark { background-image:url(Dark.png) }
+.light { background-image:url(Light.png) }
+.green { background-image:url(Green.png) }
+.heart { background-image:url(Heart.png) }
 .input-prompt {
 	width:90px;
 	margin-top:-22px;
