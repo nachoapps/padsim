@@ -7,10 +7,11 @@
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="pad.css?v3">
-	<link rel="shortcut icon" href="http://pad.dawnglare.com/favicon.ico?v2" />
+	<link rel="shortcut icon" href="favicon.ico?v2" />
 	<script src="pad.js?v7"></script>
 </head>
-<body><div id="wrapwrap">
+<body>
+<div id="wrapwrap">
 	<div id="lineback">
 		<button onclick="requestAction('help')" class="topbutton image3">?</button>
 		<button onclick="requestAction('options')" class="topbutton image6">Options</button>
@@ -48,17 +49,7 @@
 		<br /><button onclick="requestAction('convert')" id="convert">convert</button></div>
 	</div>
 	<div id="infobooth">
-	</div><script src="jquery.ui.touch-punch.min.js"></script>
-	<div id="adunit"><a href='#' onclick="hideUnit('adunit');return false;">Hide Ad</a><br />
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<!-- rec -->
-	<ins class="adsbygoogle"
-		 style="display:inline-block;width:300px;height:250px"
-		 data-ad-client="ca-pub-8590228402988995"
-		 data-ad-slot="6571896868"></ins>
-	<script>
-	(adsbygoogle = window.adsbygoogle || []).push({});
-	</script>
-	</div></div>
+	</div>
+</div>
 </body>
 </html>
