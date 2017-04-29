@@ -10,7 +10,8 @@ var colors = ['blue','green','red','light','dark','heart']
 	, savedBoardState = []
 	, changeTheWorldOn = 0
 	, timerOn = 0
-	, dropSpeed = 500
+	, defaultDropSpeed = 1
+	, dropSpeed = defaultDropSpeed
 	, scale = 90
 	, offsetMargin = 0
 	, cornerspace = 20
@@ -391,7 +392,7 @@ function dropField(){
 			}
 		}
 	}
-	if (checkField()) timeOut.push(setTimeout(function () { dropField(); }, 100));
+	if (checkField()) timeOut.push(setTimeout(function () { dropField(); }, dropSpeed/4));
 	else requestAction('fielddropped');
 }
 
@@ -1101,6 +1102,11 @@ $(function(){		// CURSOR AT AND MOVING ORB SIZE
 			return false;
 		}
 	});
+	$("#speed").change(function() {
+		dropSpeed = parseInt($(this).val());
+	});
+	defaultDropSpeed = parseInt($("#speed").val());
+	dropSpeed = defaultDropSpeed;
 });
 
 $(document).ready(function(){ // HOVER TEXT HACK
