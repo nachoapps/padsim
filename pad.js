@@ -1,5 +1,7 @@
 var base_url = [location.protocol, '//', location.host, location.pathname].join('');
 var server_url = base_url.substring(0, base_url.lastIndexOf('/')+1);
+var replaySplitToken = '.';
+var oldReplaySplitToken = '|';
 
 var colors = ['blue','green','red','light','dark','heart']
 	, colors2 = ['blue','green','red','light','dark','heart','poison','jammer', 'mortal', 'omb']
@@ -303,6 +305,22 @@ function applyPattern(){
 	return true;
 }
 
+function createLink(height, width, tilePattern, replayMoveSet, drops) {
+	var params = [];
+	if (rows!=6 || cols !=5) {
+		params.push("height=" + cols)
+		params.push("width=" + rows)
+	}
+	params.push("patt=" + tilePattern);
+	if (replayMoveSet) {
+		params.push("replay=" + replayMoveSet.join(replaySplitToken));	
+	}
+	if (drops) {
+		params.push("drops=1");
+	}
+	return base_url + "?" + params.join('&');
+}
+
 function copyPattern(modifier){
 	var tilePattern = '';
 	for(var i = 0; i < rows*cols; i++){
@@ -310,40 +328,10 @@ function copyPattern(modifier){
 		tilePattern += toLetter(divs[i].getAttribute('tileColor')).toUpperCase();
 	}
 	document.getElementById("entry").value = tilePattern;
-	if (rows!=6 || cols !=5){
-		displayOutput("<a href='" + base_url + "?height="+cols+"&width="+rows+"&patt="+tilePattern+"'>Pattern Link</a><br />", modifier);
-		if (replayMoveSet.length > 0) {
-			displayOutput("<a href='" + base_url + "?height="+cols+"&width="+rows+"&patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"'>Pattern with Replay Link</a>", 1);
-			displayOutput("<br /><a href='" + base_url + "?height="+cols+"&width="+rows+"&patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"&drops=1'>Pattern with Replay with Drops Link</a>", 1);
-		}
-	}
-	else {
-		$.ajax({
-			 async: false,
-			 type: 'GET',
-			 url: server_url + 's.php?patt='+tilePattern+'&replay='+replayMoveSet.join('|'),
-			 success: function(data) {
-				 shortenedShareLink = data;
-			 },
-			 error: function() {
-				 ajaxErrorOccured = 1;
-			 }
-		});
-		if(ajaxErrorOccured == 1){
-			displayOutput("<a href='" + base_url + "?patt="+tilePattern+"'>Pattern Link</a><br />", modifier);
-			if (replayMoveSet.length > 0) {
-				displayOutput("<a href='" + base_url + "?patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"'>Pattern with Replay Link</a>", 1);
-				displayOutput("<br /><a href='" + base_url + "?patt="+tilePattern+"&replay="+replayMoveSet.join('|')+"&drops=1'>Pattern with Replay with Drops Link</a>", 1);
-			}
-			ajaxErrorOccured = 0;
-		}
-		else{
-			displayOutput("<a href='" + base_url + "?s="+shortenedShareLink+"0'>Pattern Link</a><br />", modifier);
-			if (replayMoveSet.length > 0) {
-				displayOutput("<a href='" + base_url + "?s="+shortenedShareLink+"1'>Pattern with Replay Link</a>", 1);
-				displayOutput("<br /><a href='" + base_url + "?s="+shortenedShareLink+"2'>Pattern with Replay with Drops Link</a>", 1);
-			}
-		}
+	displayOutput("<a href='" + createLink(cols, rows, tilePattern, [], 0) + "'>Pattern Link</a><br />", modifier);
+	if (replayMoveSet.length > 0) {
+		displayOutput("<a href='" + createLink(cols, rows, tilePattern, replayMoveSet, 0) + "'>Pattern with Replay Link</a>", 1);
+		displayOutput("<br /><a href='" + createLink(cols, rows, tilePattern, replayMoveSet, 1) + "'>Pattern with Replay with Drops Link</a>", 1);
 	}
 }
 
@@ -993,7 +981,7 @@ $(function(){		// CURSOR AT AND MOVING ORB SIZE
 		document.getElementById("entry").innerHTML=shortenedData[0];
 		if (replayOption > 0){
 			if (replayOption == 2) toDrop = 2;
-			replayMoveSet=shortenedData[1].split('|');
+			replayMoveSet=shortenedData[1].split(replaySplitToken);
 			for (i=0;i<replayMoveSet.length;i++){
 				if (replayMoveSet[i] > 29 || replayMoveSet[i] < 0) {
 					replayMoveSet = [];
@@ -1006,7 +994,9 @@ $(function(){		// CURSOR AT AND MOVING ORB SIZE
 	else if ($_GET['patt']){
 		document.getElementById("entry").innerHTML=$_GET['patt'];
 		if ($_GET['replay']){
-			replayMoveSet=$_GET['replay'].split('|');
+			var replayText = $_GET['replay'];
+			var token = replayText.includes(replaySplitToken) ? replaySplitToken : oldReplaySplitToken;
+			replayMoveSet = replayText.split(token);
 			for (i=0;i<replayMoveSet.length;i++){
 				if (replayMoveSet[i] > rows*cols-1 || replayMoveSet[i] < 0) {
 					replayMoveSet = [];
